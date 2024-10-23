@@ -112,14 +112,41 @@ public class Principal {
 
         System.out.println("Digite um trecho do título que deseja buscar:");
 
-        String trechoTitulo = leitura.nextLine();
+        String trechoTitulo = leitura.next();
 
+        // Buscando o primeiro título que contém o trecho informado acima.
+        // Optional é usado pois o resultado pode ser null
+        // Caso seja null,não será retornada uma exception, mas poderá haver uma lógica para a situação
         Optional<Episodio> episodioBuscado = episodiosList.stream()
                 .filter(e -> e.getTitulo().toLowerCase().contains(trechoTitulo.toLowerCase()))
                 .peek(e -> System.out.println("Titulo Encontrado: "+  e))
                 .findFirst();
 
+        // isPresent() é usado para verificar se o objeto foi encontrado
         if(episodioBuscado.isPresent()) System.out.println("Episódio Encontrado!\nTemporada: " + episodioBuscado.get().getTemporada());
         else System.out.println("Episódio Não encontrado!");
+
+        // Criando um map de avaliações por temporada que busca apenas os episódios
+        // com a avaliação maior que 0
+        Map<Integer,Double> avaliacoesPorTemporada = episodiosList.stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                // Agrupando os episódios por temporada
+                .collect(Collectors.groupingBy(Episodio::getTemporada,
+                        //  Realizando o cálculo da média dos episódios em relação
+                        // à temporada agrupada
+                        Collectors.averagingDouble(Episodio::getAvaliacao)));
+
+        System.out.println(avaliacoesPorTemporada);
+
+        // Criando estatísticas dos episódios de acordo com a sua avaliação
+        DoubleSummaryStatistics est = episodiosList.stream()
+                .filter(e -> e.getAvaliacao() > 0)
+                .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
+
+        System.out.println(String.format("Média: %.2f", est.getAverage()));
+        System.out.println(String.format("Melhor Episódio: %.2f", est.getMax()));
+        System.out.println(String.format("Pior Episódio: %.2f", est.getMin()));
+        System.out.println(String.format("Quantidade de Avaliações: %d", est.getCount()));
+
     }
 }
