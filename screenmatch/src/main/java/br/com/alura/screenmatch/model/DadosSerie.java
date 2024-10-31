@@ -7,6 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record DadosSerie(@JsonAlias("Title") String titulo,
                          @JsonAlias("totalSeasons") Integer totalTemporadas,
+                         @JsonAlias("Genre") String genero,
+                         @JsonAlias("Plot") String sinopse,
+                         @JsonAlias("Actors") String atores,
+                         @JsonAlias("Poster") String poster,
                          @JsonAlias("imdbRating") String avaliacao) {
 }
 // JsonAlias é usado para pesquisar um atributo com o nome inserido no parâmetro
