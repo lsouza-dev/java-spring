@@ -31,7 +31,7 @@ public class Serie {
     // CascadeType.ALL define que todas as vezes que houver alteração
     // Na série, realizará a alteração nos episodios
     @OneToMany(mappedBy = "serie",cascade = CascadeType.ALL, fetch =FetchType.EAGER)
-    private List<Episodio> episodioList = new ArrayList<>();
+    private List<Episodio> episodios = new ArrayList<>();
 
     public Serie(){}
 
@@ -54,14 +54,14 @@ public class Serie {
         this.id = id;
     }
 
-    public List<Episodio> getEpisodioList() {
-        return episodioList;
+    public List<Episodio> getEpisodios() {
+        return episodios;
     }
 
-    public void setEpisodioList(List<Episodio> episodioList) {
+    public void setEpisodios(List<Episodio> episodios) {
         // Atribuindo para cada episódio a série no qual o setter é invocado
-        episodioList.forEach(e -> e.setSerie(this));
-        this.episodioList = episodioList;
+        episodios.forEach(e -> e.setSerie(this));
+        this.episodios = episodios;
     }
 
     public String getTitulo() {
@@ -131,6 +131,6 @@ public class Serie {
                         ", atores='" + atores + '\'' +
                         ", poster='" + poster + '\'' +
                         ", sinopse='" + sinopse + '\''+
-                        ", episodios='" + episodioList + '\'';
+                        ", episodios='" + episodios + '\'';
     }
 }
