@@ -58,7 +58,7 @@ public class Artista {
 
     @Override
     public String toString() {
-        return String.format("ID: %d \tNome: %s \tTipo: %s \tMúsicas: %s", id,nome,tipoArtista,musicas);
+        return String.format("ID: %d \tNome: %s \tTipo: %s \tMúsicas: %s", id,nome,tipoArtista,musicas.size());
 
 
     }

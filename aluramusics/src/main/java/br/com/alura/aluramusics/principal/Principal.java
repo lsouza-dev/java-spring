@@ -5,6 +5,7 @@ import br.com.alura.aluramusics.model.Musica;
 import br.com.alura.aluramusics.model.TipoArtista;
 import br.com.alura.aluramusics.repository.ArtistaRepository;
 
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -29,9 +30,9 @@ public class Principal {
                     2 - Adicionar Musica
                     3 - Exibir Artistas
                     4 - Exibir Musicas
-                    5 - Buscar Artistas Por ID
-                    6 - Buscar Musicas Por ID
-                    7 - Buscar Musicas por Artista
+                    5 - Buscar Musicas Por Id Artista
+                    6 - Buscar Musicas Por Nome Artista
+                    7 - Pesquisar Dados do Artista
                     
                     0 - SAIR
                     
@@ -54,13 +55,10 @@ public class Principal {
                     break;
 
                 case 5:
-                    buscarArtistas();
+                    buscarMusicasPorIdArtista();
                     break;
                 case 6:
-                    buscarMusicas();
-                    break;
-                case 7:
-                    buscarMusicasPorArtista();
+                    buscarMusicaPorNomeArtista();
                     break;
                 case 0:
                     System.out.println("Saindo da aplicação...");
@@ -116,18 +114,24 @@ public class Principal {
     }
 
     private void exibirMusicas() {
-        List<Artista> artistas = repository.findAll();
-        artistas.forEach(a -> a.getMusicas()
-                .forEach(System.out::println));
+        var musicas = repository.findAll();
+        musicas.forEach(m -> m.getMusicas().forEach(System.out::println));
     }
 
-    private void buscarArtistas() {
-        
+    private void buscarMusicasPorIdArtista() {
+        var artistas = repository.findAll();
+        artistas.forEach(System.out::println);
+        System.out.println("Digite o ID do artista que deseja selecionar.");
+        var id = scanner.nextInt();
+        scanner.nextLine();
+        Artista artista = repository.buscaMusicaPorIdArtista(id);
+        artista.getMusicas().forEach(System.out::println);
     }
 
-    private void buscarMusicas() {
-    }
-
-    private void buscarMusicasPorArtista() {
+    private void buscarMusicaPorNomeArtista() {
+        System.out.println("Digite o trecho do nome do artista:");
+        var trechoNome = scanner.nextLine();
+        List<Musica> musicas = repository.buscarMusicasPorNomeArtista(trechoNome);
+        musicas.forEach(System.out::println);
     }
 }
