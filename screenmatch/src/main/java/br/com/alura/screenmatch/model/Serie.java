@@ -1,5 +1,6 @@
 package br.com.alura.screenmatch.model;
 
+import br.com.alura.screenmatch.dto.SerieDTO;
 import br.com.alura.screenmatch.service.ConsultaMyMemory;
 import jakarta.persistence.*;
 
@@ -24,6 +25,7 @@ public class Serie {
     private String poster;
     private String sinopse;
 
+
     //@Transient // Ignora temporariamente esse atributo no banco
     // Dizendo que a relação é de 1 pra N
     // e Referenciando a serie como atributo
@@ -34,6 +36,17 @@ public class Serie {
     private List<Episodio> episodios = new ArrayList<>();
 
     public Serie(){}
+
+    public Serie(SerieDTO serieDTO){
+        this.id = serieDTO.id();
+        this.titulo = String.valueOf(serieDTO.titulo());
+        this.totalTemporadas = serieDTO.totalTemporadas();
+        this.avaliacao = serieDTO.avaliacao();
+        this.genero = serieDTO.genero();
+        this.atores = String.valueOf(serieDTO.atores());
+        this.poster = serieDTO.poster();
+        this.sinopse = serieDTO.sinopse();
+    }
 
     public Serie(DadosSerie dadosSerie){
         this.titulo = dadosSerie.titulo();
