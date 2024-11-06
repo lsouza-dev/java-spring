@@ -1,4 +1,4 @@
-
+/*
 package br.com.alura.screenmatch;
 
 import org.springframework.boot.SpringApplication;
@@ -15,3 +15,4 @@ public class ScreenmatchApplication   {
 		SpringApplication.run(ScreenmatchApplication.class, args);
 	}
 }
+*/

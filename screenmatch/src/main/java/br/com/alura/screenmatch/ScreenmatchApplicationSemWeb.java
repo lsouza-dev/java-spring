@@ -1,4 +1,4 @@
-/*
+
 package br.com.alura.screenmatch;
 
 import br.com.alura.screenmatch.principal.Principal;
@@ -26,4 +26,3 @@ public class ScreenmatchApplicationSemWeb implements CommandLineRunner {
 
 	}
 }
-*/
